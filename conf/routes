@@ -1,0 +1,69 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# TEST PAGE
+GET			/test							        controllers.Application.test
+
+# AUTHENTICATION
+POST		/signin							        controllers.Auth.signIn
+POST		/signout						        controllers.Auth.signOut
+POST		/signup							        controllers.Auth.signUp
+# signupconfirmation?userId=&confirmationToken=
+GET         /confirm                                controllers.Admin.signupConfirmation(userId : Long, confirmationToken: String)
+
+# USERNAMES
+GET			/usernames					            controllers.Users.usernames
+
+# ACCOUNT
+GET			/account						        controllers.Account.info
+PUT			/account						        controllers.Account.update
+GET			/account/mygames			            controllers.Account.myGames
+PUT			/account/password		                controllers.Account.updatePassword
+DELETE	    /account						        controllers.Account.delete
+
+# SCHEDULES
+GET			/tournaments/:id/schedules		        controllers.Schedules.list(id: Long)
+
+
+# FOLDERS
+#GET			/folders						controllers.Folders.list(sort: Option[String], page: Int ?= 1, size: Int ?= 10)
+#POST		/folders						controllers.Folders.insert
+#GET			/folders/:id				controllers.Folders.info(id: Long)
+#PUT			/folders/:id				controllers.Folders.update(id: Long)
+#PUT			/folders/:id/order/:newOrder	controllers.Folders.updateOrder(id: Long, newOrder: Int)
+#DELETE	/folders/:id				controllers.Folders.delete(id: Long)
+
+# TASKS
+#GET			/folders/:id/tasks	controllers.Tasks.list(id: Long, q: Option[String], done: Option[Boolean], sort: Option[String], page: Int ?= 1, size: Int ?= 10)
+#POST		/folders/:id/tasks	controllers.Tasks.insert(id: Long)
+#GET			/tasks/:id					controllers.Tasks.info(id: Long)
+#PUT			/tasks/:id					controllers.Tasks.update(id: Long)
+#PUT			/tasks/:id/order/:newOrder	controllers.Tasks.updateOrder(id: Long, newOrder: Int)
+#PUT			/tasks/:id/folder/:folder		controllers.Tasks.updateFolder(id: Long, folder: Long)
+#PUT			/tasks/:id/done			controllers.Tasks.updateDone(id: Long, done: Boolean = true)
+#DELETE	/tasks/:id/done			controllers.Tasks.updateDone(id: Long, done: Boolean = false)
+#DELETE	/tasks/:id					controllers.Tasks.delete(id: Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET			/assets/*file				controllers.Assets.versioned(path="/public", file: Asset)
+
+# TIPPSPIEL DB
+GET			/realDB							            controllers.Application.realDB
+GET			/setupRealDB					            controllers.Application.setupRealDB
+
+# ADMIN
+GET			/admin/                                     controllers.Admin.schedulesOfTournament
+
+# ADMIN SCHEDULES
+GET			/admin/schedules   	                        controllers.Admin.schedulesOfTournament
+GET			/admin/createSchedule                       controllers.Admin.scheduleCreate
+POST		/admin/saveSchedule                         controllers.Admin.scheduleSave
+GET			/admin/schedules       	                    controllers.Admin.schedules
+GET			/admin/schedules/:id   	                    controllers.Admin.scheduleEdit(id : Long)
+POST        /admin/schedules/:id                        controllers.Admin.scheduleUpdate(id : Long)
+
+# Admin Login page
+GET         /admin/login                                    controllers.Admin.login
+POST        /admin/login                                    controllers.Admin.authenticate
+# GET     /admin/logout                                   controllers.AdminLogin.logout
